@@ -1,0 +1,21 @@
+using System;
+using System.Security.Cryptography;
+
+class RSAExample
+{
+    static void Main()
+    {
+        using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider())
+        {
+            string originalText = "Hello World!";
+            byte[] originalData = System.Text.Encoding.UTF8.GetBytes(originalText);
+
+            byte[] encryptedData = rsa.Encrypt(originalData, false);
+            Console.WriteLine("Encrypted Text: " + Convert.ToBase64String(encryptedData));
+
+            byte[] decryptedData = rsa.Decrypt(encryptedData, false);
+            string decryptedText = System.Text.Encoding.UTF8.GetString(decryptedData);
+            Console.WriteLine("Decrypted Text: " + decryptedText);
+        }
+    }
+}
